@@ -9,19 +9,19 @@ function manipulateArray(arr) {
     });
 }
 
-function filterEvenNumbers(arr) {
+function filterOddNumbers(arr) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            const evenNumbers = arr.filter(num => num % 2 === 0);
-            resolve(evenNumbers);
+            const oddNumbers = arr.filter((num) => num % 2 === 1);
+            resolve(oddNumbers);
         }, 1000);
     });
 }
 
-function multiplyByTwo(arr) {
+function multiplyEvenByTwo(arr) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            const multipliedArr = arr.map(num => num * 2);
+            const multipliedArr = arr.map((num) => (num % 2 === 0 ? num * 2 : num));
             resolve(multipliedArr);
         }, 2000);
     });
@@ -30,17 +30,15 @@ function multiplyByTwo(arr) {
 const inputArray = [1, 2, 3, 4];
 
 manipulateArray(inputArray)
-    .then(filterEvenNumbers)
-    .then(result => {
+    .then(filterOddNumbers)
+    .then((result) => {
         output.textContent = result.join(', ');
-        return multiplyByTwo(result);
+        return multiplyEvenByTwo(inputArray);
     })
-    .then(finalResult => {
-        setTimeout(() => {
-            output.textContent = finalResult.join(', ');
-        }, 2000);
+    .then((finalResult) => {
+        output.textContent = finalResult.join(', ');
     })
-    .catch(error => {
+    .catch((error) => {
         console.error(error);
-        output.textContent = "Error occurred";
+        output.textContent = 'Error occurred';
     });
